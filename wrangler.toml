@@ -5,7 +5,7 @@ compatibility_date = "2024-09-01"
 # Cloudflare D1 Database Binding
 [[d1_databases]]
 binding = "DB"
-database_name = "netd_it_management"
+database_name = "netd_it_db11"
 database_id = "63b61aa6-68c4-4e96-a41f-a835a06f09f7" # Replace with your Cloudflare D1 Database ID from: npx wrangler d1 create netd_it_management
 
 # Workers Static Assets (Serves index.html, css, js directly on the worker domain)
