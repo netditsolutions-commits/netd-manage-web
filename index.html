@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="lo" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NETD IT SOLUTIONS</title>
+  <link rel="icon" type="image/png" href="Logo.png">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans Lao"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          },
+          borderRadius: {
+            '3xl': '1.5rem',
+            '4xl': '2rem',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Noto Sans Lao & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Pro/Free Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- SheetJS (XLSX) for Excel Export -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Custom Glassmorphic Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- ========================================================================
+       1. SIDEBAR (ເມນູດ້ານຊ້າຍ)
+       ======================================================================== -->
+  <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-56 md:w-60 glass-panel m-2.5 mr-0 flex flex-col transition-transform duration-300 -translate-x-full lg:translate-x-0 lg:static no-print">
+    
+    <!-- Sidebar Header / Logo -->
+    <div class="p-4 flex items-center gap-2.5 border-b border-white/10">
+      <div class="w-10 h-10 rounded-2xl bg-white/10 p-1.5 flex items-center justify-center border border-white/20 shadow-md shrink-0">
+        <img id="sidebar-logo" src="Logo.png" alt="NETD Logo" class="max-h-full max-w-full object-contain" onerror="this.src='https://ui-avatars.com/api/?name=NETD&background=0284c7&color=fff'">
+      </div>
+      <div class="min-w-0">
+        <h2 class="text-base font-black text-white tracking-wide truncate">NETD IT APP</h2>
+        <p class="text-[10px] text-sky-300 font-semibold tracking-wider uppercase truncate">SaaS Management</p>
+      </div>
+    </div>
+
+    <!-- Navigation Menu Links -->
+    <nav class="flex-1 overflow-y-auto p-3.5 space-y-1.5">
+      <a data-view="dashboard" class="sidebar-link active">
+        <i class="fa-solid fa-chart-pie w-5 text-center text-sky-400"></i>
+        <span>Dash board</span>
+      </a>
+
+      <a data-view="documents" class="sidebar-link">
+        <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-emerald-400"></i>
+        <span>ເອກະສານ ແລະ ໃບບີນ</span>
+      </a>
+
+      <a data-view="products" class="sidebar-link">
+        <i class="fa-solid fa-boxes-stacked w-5 text-center text-amber-400"></i>
+        <span>ການຈັດການສີນຄ້າ</span>
+      </a>
+
+      <a data-view="transactions" class="sidebar-link">
+        <i class="fa-solid fa-wallet w-5 text-center text-rose-400"></i>
+        <span>ລາຍຮັບ-ລາຍຈ່າຍ</span>
+      </a>
+
+      <a data-view="it-jobs" class="sidebar-link">
+        <i class="fa-solid fa-wrench w-5 text-center text-teal-400"></i>
+        <span>ໜ້າວຽກໄອທີ</span>
+      </a>
+
+      <a data-view="projects" class="sidebar-link">
+        <i class="fa-solid fa-diagram-project w-5 text-center text-purple-400"></i>
+        <span>ວຽກໂຄງການ</span>
+      </a>
+
+      <a data-view="employees" class="sidebar-link">
+        <i class="fa-solid fa-user-tie w-5 text-center text-cyan-400"></i>
+        <span>ຂໍ້ມູນພະນັກງານ</span>
+      </a>
+
+      <a data-view="customers" class="sidebar-link">
+        <i class="fa-solid fa-users w-5 text-center text-blue-400"></i>
+        <span>ຂໍ້ມູນລູກຄ້າ</span>
+      </a>
+
+      <a data-view="suppliers" class="sidebar-link">
+        <i class="fa-solid fa-handshake w-5 text-center text-yellow-400"></i>
+        <span>ສີນຄ້າ ແລະ ຜູ້ສະໜອງ</span>
+      </a>
+
+      <a data-view="client-systems" class="sidebar-link">
+        <i class="fa-solid fa-server w-5 text-center text-indigo-400"></i>
+        <span>ລະບົບທີ່ພັດທະນາໃຫ້ລູກຄ້າ</span>
+      </a>
+
+      <div class="pt-3 my-2 border-t border-white/10"></div>
+
+      <a data-view="settings" class="sidebar-link">
+        <i class="fa-solid fa-gear w-5 text-center text-slate-300"></i>
+        <span>ຕັ້ງຄ່າລະບົບ</span>
+      </a>
+    </nav>
+
+    <!-- Cloudflare D1 Connection Quick Badge in Sidebar Footer -->
+    <div class="p-3 m-2 rounded-2xl bg-white/5 border border-white/10 text-xs">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-slate-300 font-semibold flex items-center gap-1.5 truncate">
+          <i class="fa-brands fa-cloudflare text-orange-400"></i> Cloudflare D1
+        </span>
+        <span id="db-status-dot" class="status-dot offline"></span>
+      </div>
+      <div id="db-status-text" class="text-[10px] text-slate-400 truncate mb-2">ກວດສອບການເຊື່ອມຕໍ່...</div>
+
+      <!-- Actions: Sync D1 & ທົດສອບ D1 (ຍ້າຍມາໄວ້ເທີງ Cloudflare D1 card) -->
+      <div class="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-white/10">
+        <button id="btn-sync-d1" onclick="App.syncDatabaseWithCloudflareD1()" 
+                class="btn-glass-secondary text-[11px] py-1 px-1.5 rounded-lg flex items-center justify-center gap-1 text-white hover:border-emerald-400 hover:text-emerald-300 transition"
+                title="Sync ຂໍ້ມູນກັບ Cloudflare D1">
+          <i class="fa-solid fa-cloud-arrow-up text-emerald-400 text-xs"></i>
+          <span>Sync D1</span>
+        </button>
+        <button id="btn-test-connection" onclick="App.handleManualTestConnection()" 
+                class="btn-glass-secondary text-[11px] py-1 px-1.5 rounded-lg flex items-center justify-center gap-1 text-white hover:border-sky-400 hover:text-sky-300 transition"
+                title="ກວດສອບສະຖານະ Cloudflare D1">
+          <i class="fa-solid fa-link text-sky-400 text-xs"></i>
+          <span>ທົດສອບ D1</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       2. MAIN CONTENT WRAPPER
+       ======================================================================== -->
+  <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+    
+    <!-- Top Navbar (ແຖບດ້ານເທິງ) -->
+    <header id="top-navbar" class="glass-panel m-3 mb-0 p-3.5 px-5 flex items-center justify-between gap-4 no-print shrink-0">
+      
+      <!-- Left: Mobile Toggle & Shop Info -->
+      <div class="flex items-center gap-3 min-w-0">
+        <button id="btn-sidebar-toggle" class="lg:hidden p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 transition">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+
+        <div class="min-w-0 hidden sm:block">
+          <div class="flex items-center gap-2">
+            <h2 id="header-shop-name" class="font-extrabold text-white text-base md:text-lg truncate">
+              NETD IT Solutions & Services
+            </h2>
+            <span class="bg-sky-500/20 text-sky-300 text-[11px] font-bold px-2 py-0.5 rounded-full border border-sky-500/30 shrink-0">
+              Enterprise v2.5
+            </span>
+          </div>
+          <div class="flex items-center gap-3 text-xs text-slate-300 mt-0.5 truncate">
+            <span id="header-live-date" class="font-medium text-amber-300"></span>
+            <span class="hidden md:inline text-white/30">•</span>
+            <span id="header-shop-info" class="hidden md:inline truncate"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Theme Switcher, Database Test, User Profile & Logout -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        
+        <!-- Theme Toggle Button (ໂໝດທຳມະດາ / ໂໝດດາກ) -->
+        <button id="btn-theme-toggle" onclick="App.toggleTheme()" 
+                class="theme-toggle-btn text-xs sm:text-sm py-1.5 px-3 rounded-xl flex items-center gap-1.5"
+                title="ປ່ຽນໂໝດສີ (Light / Dark)">
+          <i id="theme-toggle-icon" class="fa-solid fa-moon text-amber-400"></i>
+          <span id="theme-toggle-text" class="hidden md:inline">ໂໝດດາກ</span>
+        </button>
+
+        <!-- "🔍 ກວດສອບປະກັນ (SN)" Button -->
+        <button id="btn-warranty-checker" onclick="App.openWarrantyCheckerModal()" 
+                class="btn-glass-secondary text-xs sm:text-sm py-1.5 px-3 rounded-xl flex items-center gap-2 text-white hover:border-amber-400 hover:text-amber-300 transition"
+                title="ກວດສອບປະກັນສິນຄ້າ ແລະ ເລກ SN / MAC">
+          <i class="fa-solid fa-shield-halved text-amber-400"></i>
+          <span class="hidden sm:inline">ກວດສອບປະກັນ (SN)</span>
+        </button>
+
+        <!-- Quick POS Sale Shortcut (ຂາຍໜ້າຮ້ານດ່ວນ) -->
+        <button id="btn-quick-pos" onclick="App.openCreatePOSModal()" 
+                class="btn-glass-primary text-xs sm:text-sm py-1.5 px-3 rounded-xl flex items-center gap-2 text-white shadow-sm hover:scale-[1.02] transition"
+                title="ເປີດໜ້າຈໍຂາຍໜ້າຮ້ານ (POS) ດ່ວນ">
+          <i class="fa-solid fa-cash-register text-amber-300"></i>
+          <span class="hidden sm:inline font-bold">ຂາຍໜ້າຮ້ານ (POS)</span>
+        </button>
+
+        <!-- User Profile Badge -->
+        <div class="flex items-center gap-2.5 pl-2 border-l border-white/15">
+          <img id="nav-user-avatar" 
+               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" 
+               alt="User Avatar" 
+               class="w-9 h-9 rounded-xl object-cover border border-white/20 shadow-sm">
+          <div class="text-left hidden md:block">
+            <div id="nav-user-name" class="text-xs font-bold text-white truncate max-w-[130px]">ສົມສັກ ແກ້ວມະນີ</div>
+            <div id="nav-user-role" class="text-[10px] text-sky-300 font-semibold truncate">Admin / ຜູ້ຈັດການ</div>
+          </div>
+          <button onclick="App.openChangePasswordModal()" title="ປ່ຽນລະຫັດຜ່ານ" class="p-2 rounded-xl bg-white/5 hover:bg-amber-500/20 text-slate-300 hover:text-amber-400 transition">
+            <i class="fa-solid fa-key"></i>
+          </button>
+          <button id="btn-logout" title="ອອກຈາກລະບົບ" class="p-2 rounded-xl bg-white/5 hover:bg-rose-500/20 text-slate-300 hover:text-rose-400 transition">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Content Area: Dynamic SPA Container (ປັບຂະໜາດເຕັມຈໍ ບໍ່ໃຫ້ເຫຼືອຂອບກວ້າງເກີນໄປ) -->
+    <main class="flex-1 overflow-y-auto p-2 sm:p-3.5">
+      <div id="main-content-view" class="w-full max-w-full px-1 sm:px-2 pb-10">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ========================================================================
+       3. AUTHENTICATION / LOGIN MODAL
+       ======================================================================== -->
+  <div id="login-modal" class="fixed inset-y-0 inset-x-0 z-50 modal-backdrop hidden items-center justify-center p-4">
+    <div class="modal-content-glass max-w-md w-full p-7 text-center relative border border-white/25 shadow-2xl">
+      
+      <!-- Logo in Modal -->
+      <div class="w-20 h-20 mx-auto rounded-3xl bg-white/10 p-3 flex items-center justify-center border border-white/20 shadow-xl mb-4">
+        <img src="Logo.png" alt="NETD Logo" class="max-h-full max-w-full object-contain" onerror="this.src='https://ui-avatars.com/api/?name=NETD&background=0284c7&color=fff'">
+      </div>
+
+      <h2 class="text-2xl font-black text-white tracking-tight">ເຂົ້າສູ່ລະບົບ (Login)</h2>
+      <p class="text-xs text-slate-300 mt-1 mb-6">ລະບົບບໍລິຫານທຸລະກິດຮ້ານໃຫ້ບໍລິການໄອທີ - Cloudflare D1 Platform</p>
+
+      <form onsubmit="App.handleLogin(document.getElementById('login-user').value, document.getElementById('login-pass').value); return false;" class="space-y-4 text-left">
+        <div>
+          <label class="text-xs font-semibold text-slate-300 block mb-1">ຊື່ຜູ້ໃຊ້ (Username / Account ພະນັກງານ)</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none text-sm">
+              <i class="fa-solid fa-user"></i>
+            </span>
+            <input type="text" id="login-user" required class="glass-input w-full pl-icon text-sm" style="padding-left: 2.85rem !important;" placeholder="ໃສ່ username">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs font-semibold text-slate-300 block mb-1">ລະຫັດຜ່ານ (Password)</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none text-sm">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+            <input type="password" id="login-pass" required class="glass-input w-full pl-icon text-sm" style="padding-left: 2.85rem !important;" placeholder="ໃສ່ລະຫັດຜ່ານ">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-glass-primary w-full justify-center py-2.5 mt-2 text-sm shadow-xl font-bold">
+          <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i> ເຂົ້າສູ່ລະບົບ
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
