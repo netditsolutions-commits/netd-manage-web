@@ -83,15 +83,15 @@ export default {
       // 1. Health check & Ping test endpoint
       if (url.pathname === "/api/ping" || url.pathname === "/api/health") {
         try {
-          const result = await db.prepare("SELECT datetime('now') as server_time, sqlite_version() as sqlite_ver").first();
-          return json({
-            success: true,
-            status: "online",
-            message: "Cloudflare D1 Database Connected Successfully!",
-            server_time: result.server_time,
-            sqlite_version: result.sqlite_ver,
-            timestamp: new Date().toISOString()
-          });
+         const result = await db.prepare("SELECT datetime('now') as server_time").first();
+return json({
+  success: true,
+  status: "online",
+  message: "Cloudflare D1 Database Connected Successfully!",
+  server_time: result.server_time,
+  sqlite_version: "Cloudflare D1 Engine",
+  timestamp: new Date().toISOString()
+});
         } catch (dbErr) {
           return json({
             success: false,
